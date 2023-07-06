@@ -1,3 +1,5 @@
+// first npm init
+
 const express = require('express');
 const app = express();
 
@@ -13,10 +15,10 @@ app.get('/',(req,res)=>{
 
 app.get('/api/user',(req,res)=>{
     res.send({
-        name:"Francis",
-        lastname:"Jones"
+        name:"tony",
+        lastname:"daless"
     })
 })
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8080
 app.listen(PORT)
