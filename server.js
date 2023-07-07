@@ -1,12 +1,16 @@
-// first npm init
-//
 
 const express = require('express');
 const app = express();
 
+// MIDDLEWARE appply below code
+app.use('/css',express.static(__dirname+'/public/css'))
+
 app.get('/',(req,res)=>{
     res.send(`
         <html>
+        <head>
+        <link rel="stylesheet" href="/css/styles.css">
+        </head>
             <body>
                 <h1>Hello !!</h1>
             </body>
