@@ -1,6 +1,9 @@
 
 const express = require('express');
+const bodyParser = require('body-parser');
+const fs = require('fs');
 const app = express();
+
 
 // MIDDLEWARE code... next() aplly middleware en other code below
 app.use('/css',express.static(__dirname+'/public/css'))
@@ -24,6 +27,23 @@ app.get('/',(req,res)=>{
         </html>
     `)
 });
+
+const jsonParser = bodyParser.json()
+
+// get file
+app.get('/user',(req,res)=>{
+    let HTML = fs.readFileSync(`${__dirname}/views/user.html`);
+    res.send(`${HTML}`)
+})
+
+// then add route
+app.post('/api/adduser',jsonParser,(req,res)=>{
+    console.log(req.body);
+    res.sendStatus(200);
+})
+
+
+
 
 //PARAMS - DONT FORGET :user/:id
 // no forget api =>http://localhost:8080/api/tony/55
