@@ -1,11 +1,23 @@
-// first npm init
 
 const express = require('express');
 const app = express();
 
+// MIDDLEWARE code... next() aplly middleware en other code below
+app.use('/css',express.static(__dirname+'/public/css'))
+app.use('/',(req,res,next)=>{
+  console.log('request for:' + req.url)
+  res.cookie('cookieName','cookieValue')
+  next()
+})
+
+
+
 app.get('/',(req,res)=>{
     res.send(`
         <html>
+        <head>
+        <link rel="stylesheet" href="/css/styles.css">
+        </head>
             <body>
                 <h1>Hello !!</h1>
             </body>
