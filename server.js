@@ -2,8 +2,15 @@
 const express = require('express');
 const app = express();
 
-// MIDDLEWARE appply below code
+// MIDDLEWARE code... next() aplly middleware en other code below
 app.use('/css',express.static(__dirname+'/public/css'))
+app.use('/',(req,res,next)=>{
+  console.log('request for:' + req.url)
+  res.cookie('cookieName','cookieValue')
+  next()
+})
+
+
 
 app.get('/',(req,res)=>{
     res.send(`
