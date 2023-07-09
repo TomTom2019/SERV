@@ -1,44 +1,44 @@
-// first npm init
-
 const express = require('express');
 const app = express();
+const { MongoClient } = require('mongodb');
 
-app.get('/',(req,res)=>{
-    res.send(`
-        <html>
-            <body>
-                <h1>Hello !!</h1>
-            </body>
-        </html>
-    `)
-});
 
-//PARAMS - DONT FORGET :user/:id
-// no forget api =>http://localhost:8080/api/tony/55
-app.get('/api/:user/:id',(req,res)=>{
-    let id = req.params.id;
-    let user = req.params.user
-    res.send(`
-        <html>
-            <body>
-                <h1>The user name is ${user} and the id is ${id}</h1>
-            </body>
-        </html>
-    `)
-})
+const mongoUri = 'mongodb+srv://admin:testing123@cluster0.lwqgg.mongodb.net/authApp?retryWrites=true&w=majority'
 
-// querystring = hhh.com/cat?brand=batar&year=2007
-app.get('/api/cat',(req,res)=>{
-    let brand = req.query.brand;
-    let year = req.query.year;
+const client = new MongoClient(mongoUri);
 
-    res.send({
-        brand,
-        year
-    })
+
+app.get('/api/users',async(req,res)=>{
+    try {
+        await client.connect();
+        const database = client.db('myApp');
+        const collection = database.collection('users');
+        const query = await collection.insertOne({
+            name:'Tom',
+            lastname:'Dale'
+        })
+        console.log(query)
+        res.status(200).json({awesome:'yes'})
+    } catch(error){
+        throw error
+    } finally {
+        await client.close();
+        console.log('all is done')
+    }
 })
 
 
 
-const PORT = process.env.PORT || 8080
-app.listen(PORT)
+// MongoClient.connect(mongoUri,(err, client)=>{
+//     if(err){
+//         throw err
+//     }
+//     console.log('Connected to the DB')
+// });
+
+
+const port = process.env.POST || 3001;
+app.listen(port);
+
+/// francis8976
+/// YaTNPCXktKNJvR20
