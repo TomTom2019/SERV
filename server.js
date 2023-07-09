@@ -13,7 +13,7 @@ app.use('/',(req,res,next)=>{
   next()
 })
 
-
+app.use(bodyParser.json())
 
 app.get('/',(req,res)=>{
     res.send(`
@@ -28,7 +28,11 @@ app.get('/',(req,res)=>{
     `)
 });
 
+/* app is global  const is not global
+jsonParser add ('/api/adduser',jsonParser,(req,res)
+ urlencoderParser add ('/api/queryadd',urlencodedParser,(req,res)=>*/
 const jsonParser = bodyParser.json()
+const urlencodedParser = bodyParser.urlencoded({extended:false})
 
 // get file
 app.get('/user',(req,res)=>{
@@ -42,7 +46,18 @@ app.post('/api/adduser',jsonParser,(req,res)=>{
     res.sendStatus(200);
 })
 
+app.get('/querystring',(req,res)=>{
+    let HTML = fs.readFileSync(`${__dirname}/views/querystring.html`);
+    res.send(`${HTML}`)
+})
 
+app.post('/api/queryadd',urlencodedParser,(req,res)=>{
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
+    console.log(firstname + ' ' + lastname)
+
+    res.sendStatus(200);
+})
 
 
 //PARAMS - DONT FORGET :user/:id
