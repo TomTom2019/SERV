@@ -13,8 +13,8 @@ app.get('/api/users',async(req,res)=>{
         const database = client.db('myApp');
         const collection = database.collection('users');
         const query = await collection.insertOne({
-            name:'Francis',
-            lastname:'Jones'
+            name:'Tom',
+            lastname:'Dale'
         })
         console.log(query)
         res.status(200).json({awesome:'yes'})
@@ -33,10 +33,10 @@ app.get('/api/users',async(req,res)=>{
 //         throw err
 //     }
 //     console.log('Connected to the DB')
-// });
 
 
-const port = process.env.POST || 3002;
+
+const port = process.env.POST || 3000;
 app.listen(port);
 
 /// francis8976
