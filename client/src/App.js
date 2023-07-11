@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const App = () => {
 
-  const addUser = () => {
+  const User = () => {
     axios.get('/api/users')
     .then(response =>{
       console.log(response.data)
@@ -17,9 +17,9 @@ const App = () => {
     <div className='app'>
       
       <button
-        onClick={()=>addUser()}
+        onClick={()=>User()}
       >
-        Add user
+        user
       </button>
 
     </div>
