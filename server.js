@@ -36,7 +36,7 @@ app.get('/api/users',async(req,res)=>{
 // });
 
 
-const port = process.env.POST || 3808;
+const port = process.env.POST || 3002;
 app.listen(port);
 
 /// francis8976
