@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const { MongoClient } = require('mongodb');
 ///
-const mongoUri = 'mongodb+srv://admin:testing123@cluster0.lwqgg.mongodb.net/authApp?retryWrites=true&w=majority'
+const mongoUri = 'mongodb+srv://admin:testing123@cluster0.lwqgg.mongodb.net/MyApp?retryWrites=true&w=majority'
 
 const client = new MongoClient(mongoUri);
 
@@ -28,16 +28,10 @@ app.get('/api/users',async(req,res)=>{
 
 
 
-// MongoClient.connect(mongoUri,(err, client)=>{
-//     if(err){
-//         throw err
-//     }
-//     console.log('Connected to the DB')
+   
 
 
 
 const port = process.env.POST || 3001;
 app.listen(port);
 
-/// francis8976
-/// YaTNPCXktKNJvR20
