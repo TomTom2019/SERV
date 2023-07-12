@@ -6,7 +6,7 @@ const mongoUri = 'mongodb+srv://admin:testing123@cluster0.lwqgg.mongodb.net/auth
 
 const client = new MongoClient(mongoUri);
 
-
+//create your post here backen
 app.get('/api/users',async(req,res)=>{
     try {
         await client.connect();
