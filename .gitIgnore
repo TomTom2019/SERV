@@ -2,7 +2,7 @@
 node_modules
 /.pnp
 .pnp.js
-mongodb+srv://admin:testing123@cluster0.lwqgg.mongodb.net/MyApp?retryWrites=true&w=majority
+
 # testing
 /coverage
 

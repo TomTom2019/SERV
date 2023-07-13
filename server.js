@@ -2,11 +2,12 @@ const express = require('express');
 const app = express();
 const { MongoClient } = require('mongodb');
 ///
-const mongoUri = ''
+const mongoUri = 'mongodb+srv://admin:testing123@cluster0.lwqgg.mongodb.net/MyApp?retryWrites=true&w=majority'
 
+// TO CONNECT  SERVER
 const client = new MongoClient(mongoUri);
 
-//create your post here backen
+// route + how to connect db with try{} => catch{} => finally{}
 app.get('/api/users',async(req,res)=>{
     try {
         await client.connect();
@@ -14,7 +15,9 @@ app.get('/api/users',async(req,res)=>{
         const collection = database.collection('users');
         const query = await collection.insertOne({
             name:'Tom',
-            lastname:'Dale'
+            lastname:'Dale',
+            cat:'ponpon'
+            
         })
         console.log(query)
         res.status(200).json({awesome:'yes'})
