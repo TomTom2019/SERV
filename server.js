@@ -1,44 +1,40 @@
-// first npm init
-
 const express = require('express');
 const app = express();
+const { MongoClient } = require('mongodb');
+///
+const mongoUri = 'mongodb+srv://admin:testing123@cluster0.lwqgg.mongodb.net/MyApp?retryWrites=true&w=majority'
 
-app.get('/',(req,res)=>{
-    res.send(`
-        <html>
-            <body>
-                <h1>Hello !!</h1>
-            </body>
-        </html>
-    `)
-});
+// TO CONNECT  SERVER
+const client = new MongoClient(mongoUri);
 
-//PARAMS - DONT FORGET :user/:id
-// no forget api =>http://localhost:8080/api/tony/55
-app.get('/api/:user/:id',(req,res)=>{
-    let id = req.params.id;
-    let user = req.params.user
-    res.send(`
-        <html>
-            <body>
-                <h1>The user name is ${user} and the id is ${id}</h1>
-            </body>
-        </html>
-    `)
-})
-
-// querystring = hhh.com/cat?brand=batar&year=2007
-app.get('/api/cat',(req,res)=>{
-    let brand = req.query.brand;
-    let year = req.query.year;
-
-    res.send({
-        brand,
-        year
-    })
+// route + how to connect db with try{} => catch{} => finally{}
+app.get('/api/users',async(req,res)=>{
+    try {
+        await client.connect();
+        const database = client.db('myApp');
+        const collection = database.collection('users');
+        const query = await collection.insertOne({
+            name:'Tom',
+            lastname:'Dale',
+            cat:'ponpon'
+            
+        })
+        console.log(query)
+        res.status(200).json({awesome:'yes'})
+    } catch(error){
+        throw error
+    } finally {
+        await client.close();
+        console.log('all is done')
+    }
 })
 
 
 
-const PORT = process.env.PORT || 8080
-app.listen(PORT)
+   
+
+
+
+const port = process.env.POST || 3001;
+app.listen(port);
+
