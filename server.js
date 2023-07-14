@@ -1,37 +1,32 @@
+
 const express = require('express');
 const app = express();
-const { MongoClient } = require('mongodb');
-///
-const mongoUri = 'mongodb+srv://admin:testing123@cluster0.lwqgg.mongodb.net/MyApp?retryWrites=true&w=majority'
+const mongoose = require('mongoose')
+const bodyParser = require('body-parser');
 
-// TO CONNECT  SERVER
-const client = new MongoClient(mongoUri);
+const mongoUri = 'mongodb+srv://admin:testing123@cluster0.lwqgg.mongodb.net/MyApp?retryWrites=true&w=majority';
 
-// route + how to connect db with try{} => catch{} => finally{}
-app.get('/api/users',async(req,res)=>{
-    try {
-        await client.connect();
-        const database = client.db('myApp');
-        const collection = database.collection('users');
-        const query = await collection.insertOne({
-            name:'Tom',
-            lastname:'Dale',
-            cat:'ponpon'
-            
-        })
-        console.log(query)
-        res.status(200).json({awesome:'yes'})
-    } catch(error){
-        throw error
-    } finally {
-        await client.close();
-        console.log('all is done')
-    }
+
+mongoose.connect(mongoUri)
+app.use(bodyParser.json());
+
+
+
+const carSchema = mongoose.Schema({
+    brand:String,
+    model:String,
+    year:Number,
+    avail:Boolean
+});
+
+
+const Car = mongoose.model('Car',carSchema)
+//////////
+
+app.post('/api/addcar',(req,res)=>{
+    console.log(req.body)
 })
 
-
-
-   
 
 
 
