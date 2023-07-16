@@ -11,7 +11,7 @@ mongoose.connect(mongoUri)
 app.use(bodyParser.json());
 
 
-
+// MODEL => SCHEMA
 const carSchema = mongoose.Schema({
     brand:String,
     model:String,
