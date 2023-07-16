@@ -8,9 +8,9 @@ const App = () => {
 
 const onCarSubmit = () =>{
    axios.post('/api/addcar',{
-     brand:'Hunday',
-    model:'800',
-    year:2000,
+    brand:'mercedez',
+    model:'terra',
+    year:2010,
     avail:true
    })
    .then(response =>{
@@ -26,7 +26,7 @@ const onCarSubmit = () =>{
       <button
         onClick={()=> onCarSubmit()}
       >
-        db
+        add car to db
       </button>
 
     </div>

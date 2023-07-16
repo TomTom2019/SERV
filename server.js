@@ -19,12 +19,25 @@ const carSchema = mongoose.Schema({
     avail:Boolean
 });
 
-
+// TO GET DATA INSTALL body-parser
 const Car = mongoose.model('Car',carSchema)
-//////////
 
+// model => Car
 app.post('/api/addcar',(req,res)=>{
-    console.log(req.body)
+   const addCar = new Car({
+    brand:req.body.brand,
+    model:req.body.model,
+    year:req.body.year,
+    avail:req.body.avail
+   })
+
+
+    
+    addCar.save((err,doc)=>{
+        if(err) return console.log(err)
+        res.sendStatus(200)
+    })
+
 })
 
 
