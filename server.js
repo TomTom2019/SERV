@@ -28,9 +28,9 @@ const Car = mongoose.model('Car',carSchema)
 //Car.find({_id:'64b3e7bde106eea43d3dfe7a'}
 //res.json([doc])
 app.get('/api/getcars',(req,res)=>{
-    Car.findById('64b3e4748d2b293fc9e0000e',(err,doc)=>{
+    Car.find({} ,(err,doc)=>{
       if(err) return console.log(err)
-        res.json([doc])
+        res.json([])
     })
 
 })

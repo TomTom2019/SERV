@@ -21,8 +21,8 @@ useEffect(()=>{
 
 const onCarSubmit = () =>{
    axios.post('/api/addcar',{
-    brand:'mercedez',
-    model:'terra',
+    brand:'juaguar',
+    model:'tera',
     year:2010,
     avail:true
    })
