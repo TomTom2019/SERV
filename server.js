@@ -23,14 +23,14 @@ const carSchema = mongoose.Schema({
 const Car = mongoose.model('Car',carSchema)
 
 
-// GET DATA
+// GET DATA => Car.find((err,doc)=>{}
 //Car.find({brand:'zuzuki'}
 //Car.find({_id:'64b3e7bde106eea43d3dfe7a'}
 //res.json([doc])
 app.get('/api/getcars',(req,res)=>{
-    Car.find({} ,(err,doc)=>{
+    Car.find((err,doc)=>{
       if(err) return console.log(err)
-        res.json([])
+        res.json(doc)
     })
 
 })
