@@ -52,6 +52,14 @@ app.post('/api/addcar',(req,res)=>{
 
 })
 
+ /*OK Car.remove({brand:brand}   => Car.remove({}) WILL REMOVE YOUR DATABASE*/
+app.post('/api/removecar',(req,res)=>{
+    const brand = req.body.brand;
+    Car.remove({brand:brand},(err,doc)=>{
+        if(err) return console.log(err)
+        res.json(doc)
+    })
+})
 
 
 

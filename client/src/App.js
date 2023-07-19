@@ -2,21 +2,21 @@ import { useEffect,useState } from 'react'
 import axios from 'axios';
 
 
-/// GET DATA
+/// GET DATA another way
 const App = () => {
   let [cars,setCars] = useState([])
 
+  useEffect(()=>{
+    getCars();
+  },[])
 
-useEffect(()=>{
+// get data another way
+  const getCars = () =>{
     axios.get('/api/getcars')
-    .then(response =>{
+    .then( response =>{
       setCars(response.data)
     })
-
-},[])
-
-
-
+  }
 
 
 const onCarSubmit = () =>{
@@ -30,6 +30,18 @@ const onCarSubmit = () =>{
     console.log(response.data)
    })
 }
+
+
+// REMOVE
+const onCarRemove = () =>{
+    axios.post('/api/removecar',{
+      brand:'juaguar'
+    })
+    .then( response =>{
+      console.log(response.data)
+      getCars();
+    })
+  }
 
 
 
@@ -47,9 +59,14 @@ const onCarSubmit = () =>{
              {car.brand}
            </div>
          ))
-
-
          }
+
+ <hr/>
+      <h2>Remove element/s</h2>
+      <button onClick={()=> onCarRemove()}>Delete it !!</button>
+
+
+
     </div>
   )
 }
