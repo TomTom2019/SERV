@@ -23,10 +23,6 @@ const carSchema = mongoose.Schema({
 const Car = mongoose.model('Car',carSchema)
 
 
-// GET DATA => Car.find((err,doc)=>{}
-//Car.find({brand:'zuzuki'}
-//Car.find({_id:'64b3e7bde106eea43d3dfe7a'}
-//res.json([doc])
 app.get('/api/getcars',(req,res)=>{
     Car.find((err,doc)=>{
       if(err) return console.log(err)
@@ -60,6 +56,39 @@ app.post('/api/removecar',(req,res)=>{
         res.json(doc)
     })
 })
+
+//car.set({brand:brand}) is in memory
+app.post('/api/updatecar',(req,res)=>{
+    const id = req.body.id;
+    const brand = req.body.brand;
+
+    Car.findById(id,(err,car)=>{
+        if(err) return console.log(err)
+        car.set({
+            brand:brand
+        })
+
+        car.save((err,doc)=>{
+            if(err) return console.log(err)
+            res.json(doc)
+        })
+    })
+})
+
+
+// app.post('/api/updatecar',(req,res)=>{
+//     const id = req.body.id;
+//     const brand = req.body.brand;
+
+//     Car.findByIdAndUpdate(id,{
+//         $set:{ brand: brand }
+//     },{
+//         new:true
+//     },(err,doc)=>{
+//         if(err) return console.log(err)
+//         res.json(doc)
+//     })
+// })
 
 
 
